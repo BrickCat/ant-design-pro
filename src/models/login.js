@@ -19,10 +19,10 @@ export default {
       if (response.status === 200) {
         setToken(response.data.access_token)
         const userInfo = yield call(getInfo);
-        console.log(userInfo.data.data);
+        console.log(userInfo)
         result = {
           type:payload.type,
-          currentAuthority: userInfo.data.data.roles[0],
+          currentAuthority: userInfo.data.roles[0],
           status:'ok'
         }
       }
@@ -35,6 +35,7 @@ export default {
     },
     *logout(_, { put, select }) {
       try {
+        setToken('');
         // get location pathname
         const urlParams = new URL(window.location.href);
         const pathname = yield select(state => state.routing.location.pathname);

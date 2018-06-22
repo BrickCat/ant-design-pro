@@ -17,11 +17,17 @@ export default {
       });
     },
     *fetchCurrent(_, { call, put }) {
-      console.log(111)
       const response = yield call(queryCurrent);
+      console.log(response)
+      let user = {
+        name: response.data.sysUser.username,
+        avatar: response.data.sysUser.avatar,
+        userid: response.data.sysUser.userId,
+        notifyCount: 12,
+      }
       yield put({
         type: 'saveCurrentUser',
-        payload: response,
+        payload: user,
       });
     },
   },

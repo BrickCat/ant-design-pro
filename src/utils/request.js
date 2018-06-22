@@ -11,7 +11,6 @@ const service = axios.create({
 
 // request拦截器
 service.interceptors.request.use(config => {
-  console.log(config)
   if (getToken()) {
     if(config.url == "/auth/oauth/token"){
       const { dispatch } = store;
@@ -33,7 +32,12 @@ service.interceptors.response.use(
       notification.info(res.msg)
       return Promise.reject(res)
     }
-    return response
+    if(getToken()){
+      return response.data
+    }else{
+      return response
+    }
+
   },
   error => {
      const res = error.response

@@ -16,7 +16,6 @@ export default {
     radarData: [],
     loading: false,
   },
-
   effects: {
     *fetch(_, { call, put }) {
       const response = yield call(fakeChartData);

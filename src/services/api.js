@@ -1,5 +1,12 @@
 import { stringify } from 'qs';
 import request from '../utils/request';
+import mockjs from 'mockjs';
+import { getRule, postRule } from '../../mock/rule';
+import { getActivities, getNotice, getFakeList } from '../../mock/api';
+import { getFakeChartData } from '../../mock/chart';
+import { getProfileBasicData } from '../../mock/profile';
+import { getProfileAdvancedData } from '../../mock/profile';
+import { getNotices } from '../../mock/notices';
 
 export async function queryProjectNotice() {
   return request('/api/project/notice');
@@ -41,11 +48,15 @@ export async function fakeSubmitForm(params) {
 }
 
 export async function fakeChartData() {
-  return request('/api/fake_chart_data');
+  //return request('/api/fake_chart_data');
+  return getFakeChartData;
 }
 
 export async function queryTags() {
-  return request('/api/tags');
+  //return request('/api/tags');
+  return mockjs.mock({
+    'list|100': [{ name: '@city', 'value|1-100': 150, 'type|0-2': 1 }],
+  });
 }
 
 export async function queryBasicProfile() {
@@ -92,5 +103,6 @@ export async function fakeRegister(params) {
 }
 
 export async function queryNotices() {
-  return request('/api/notices');
+  //return request('/api/notices');
+  return getNotice;
 }
