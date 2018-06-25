@@ -1,5 +1,4 @@
-export const getNotices = (req, res) => {
-  res.json([
+export const getHeaderNotices = [
     {
       id: '000000001',
       avatar: 'https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png',
@@ -92,8 +91,7 @@ export const getNotices = (req, res) => {
       status: 'processing',
       type: '待办',
     },
-  ]);
-};
+  ]
 export default {
-  getNotices,
+  getHeaderNotices,
 };

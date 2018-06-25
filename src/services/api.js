@@ -6,14 +6,14 @@ import { getActivities, getNotice, getFakeList } from '../../mock/api';
 import { getFakeChartData } from '../../mock/chart';
 import { getProfileBasicData } from '../../mock/profile';
 import { getProfileAdvancedData } from '../../mock/profile';
-import { getNotices } from '../../mock/notices';
+import { getHeaderNotices } from '../../mock/notices';
 
 export async function queryProjectNotice() {
-  return request('/api/project/notice');
+  return getNotice;
 }
 
 export async function queryActivities() {
-  return request('/api/activities');
+  return getActivities;
 }
 
 export async function queryRule(params) {
@@ -104,5 +104,5 @@ export async function fakeRegister(params) {
 
 export async function queryNotices() {
   //return request('/api/notices');
-  return getNotice;
+  return getHeaderNotices;
 }
