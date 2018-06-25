@@ -1,16 +1,14 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Layout, Icon, message } from 'antd';
+import { Layout, Icon, message, BackTop } from 'antd';
 import DocumentTitle from 'react-document-title';
 import { connect } from 'dva';
 import { Route, Redirect, Switch, routerRedux } from 'dva/router';
 import { ContainerQuery } from 'react-container-query';
 import classNames from 'classnames';
 import pathToRegexp from 'path-to-regexp';
-import { enquireScreen, unenquireScreen } from 'enquire-js';
-import GlobalHeader from '../components/GlobalHeader';
+import GlobalHeader from '../components/GlobalHeader/_f_index';
 import GlobalFooter from '../components/GlobalFooter';
-import SiderMenu from '../components/SiderMenu';
 import NotFound from '../routes/Exception/404';
 import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
@@ -79,10 +77,6 @@ const query = {
   },
 };
 
-let isMobile;
-enquireScreen(b => {
-  isMobile = b;
-});
 
 class BasicLayout extends React.PureComponent {
   static childContextTypes = {
@@ -90,7 +84,7 @@ class BasicLayout extends React.PureComponent {
     breadcrumbNameMap: PropTypes.object,
   };
   state = {
-    isMobile,
+    title:'Ant Design Pro'
   };
   getChildContext() {
     const { location, routerData } = this.props;
@@ -100,17 +94,12 @@ class BasicLayout extends React.PureComponent {
     };
   }
   componentDidMount() {
-    this.enquireHandler = enquireScreen(mobile => {
-      this.setState({
-        isMobile: mobile,
-      });
-    });
     this.props.dispatch({
       type: 'user/fetchCurrent',
     });
   }
   componentWillUnmount() {
-    unenquireScreen(this.enquireHandler);
+
   }
   getPageTitle() {
     const { routerData, location } = this.props;
@@ -162,18 +151,14 @@ class BasicLayout extends React.PureComponent {
     });
   };
   handleMenuClick = ({ key }) => {
-    if (key === 'triggerError') {
-      this.props.dispatch(routerRedux.push('/exception/trigger'));
-      return;
-    }
-    if (key === 'index') {
-      this.props.dispatch(routerRedux.push('/f'));
-      return;
-    }
     if (key === 'logout') {
       this.props.dispatch({
         type: 'login/logout',
       });
+    }
+    if(key === 'settings'){
+      this.props.dispatch(routerRedux.push('/'));
+      return;
     }
   };
   handleNoticeVisibleChange = visible => {
@@ -191,23 +176,10 @@ class BasicLayout extends React.PureComponent {
       notices,
       routerData,
       match,
-      location,
     } = this.props;
     const bashRedirect = this.getBaseRedirect();
     const layout = (
       <Layout>
-        <SiderMenu
-          logo={logo}
-          // 不带Authorized参数的情况下如果没有权限,会强制跳到403界面
-          // If you do not have the Authorized parameter
-          // you will be forced to jump to the 403 interface without permission
-          Authorized={Authorized}
-          menuData={getMenuData()}
-          collapsed={collapsed}
-          location={location}
-          isMobile={this.state.isMobile}
-          onCollapse={this.handleMenuCollapse}
-        />
         <Layout>
           <Header style={{ padding: 0 }}>
             <GlobalHeader
@@ -216,7 +188,7 @@ class BasicLayout extends React.PureComponent {
               fetchingNotices={fetchingNotices}
               notices={notices}
               collapsed={collapsed}
-              isMobile={this.state.isMobile}
+              title={this.state.title}
               onNoticeClear={this.handleNoticeClear}
               onCollapse={this.handleMenuCollapse}
               onMenuClick={this.handleMenuClick}
@@ -224,6 +196,8 @@ class BasicLayout extends React.PureComponent {
             />
           </Header>
           <Content style={{ margin: '24px 24px 0', height: '100%' }}>
+            <BackTop>
+            </BackTop>
             <Switch>
               {redirectData.map(item => (
                 <Redirect key={item.from} exact from={item.from} to={item.to} />
@@ -291,3 +265,4 @@ export default connect(({ user, global, loading }) => ({
   fetchingNotices: loading.effects['global/fetchNotices'],
   notices: global.notices,
 }))(BasicLayout);
+

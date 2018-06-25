@@ -18,12 +18,14 @@ function RouterConfig({ history, app }) {
   const UserLayout = routerData['/user'].component;
   const ExceptionLayout = routerData['/exception'].component;
   const BasicLayout = routerData['/'].component;
+  const IndexLayout = routerData['/f'].component;
   return (
     <LocaleProvider locale={zhCN}>
       <ConnectedRouter history={history}>
         <Switch>
           <Route path="/user" component={UserLayout} />
           <Route path="/exception" component={ExceptionLayout} />
+          <Route path="/f" component={IndexLayout} />
           <AuthorizedRoute
             path="/"
             render={props => <BasicLayout {...props} />}

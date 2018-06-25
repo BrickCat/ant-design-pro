@@ -155,13 +155,14 @@ const menuData = [
     ],
   },
   {
-    name: '学习',
+    name: '前台',
     icon: 'fork',
-    path: 'learn',
+    path: 'f',
+    hideInMenu: false,
     children: [
       {
-        name: '创建新页面',
-        path: 'create-page'
+        name: '首页',
+        path: 'index'
       }
     ],
   },

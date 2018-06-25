@@ -58,24 +58,20 @@ export default class GlobalHeader extends PureComponent {
   render() {
     const {
       currentUser = {},
-      collapsed,
       fetchingNotices,
-      isMobile,
       logo,
+      title,
       onNoticeVisibleChange,
       onMenuClick,
       onNoticeClear,
     } = this.props;
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
-        <Menu.Item disabled>
+        <Menu.Item key="user">
           <Icon type="user" />个人中心
         </Menu.Item>
-        <Menu.Item key="index">
-          <Icon type="setting" />前往首页
-        </Menu.Item>
-        <Menu.Item key="triggerError">
-          <Icon type="close-circle" />触发报错
+        <Menu.Item key="settings">
+          <Icon type="setting" />设置
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="logout">
@@ -86,17 +82,13 @@ export default class GlobalHeader extends PureComponent {
     const noticeData = this.getNoticeData();
     return (
       <div className={styles.header}>
-        {isMobile && [
-          <Link to="/" className={styles.logo} key="logo">
-            <img src={logo} alt="logo" width="32" />
-          </Link>,
-          <Divider type="vertical" key="line" />,
-        ]}
-        <Icon
-          className={styles.trigger}
-          type={collapsed ? 'menu-unfold' : 'menu-fold'}
-          onClick={this.toggle}
-        />
+        <Link to="/f" className={styles.logo} key="logo">
+          <img src={logo} alt="logo" width="32" />
+        </Link>
+        <Divider type="vertical" key="line" />
+        {title != '' && <Link to="/f" key="title" className={styles.title}>
+          {title}
+        </Link>}
         <div className={styles.right}>
           <HeaderSearch
             className={`${styles.action} ${styles.search}`}

@@ -168,8 +168,11 @@ export const getRouterData = app => {
     '/user/register-result': {
       component: dynamicWrapper(app, [], () => import('../routes/User/RegisterResult')),
     },
-    '/learn/create-page': {
-      component: dynamicWrapper(app, [], () => import('../routes/Learn/Create-Page/CreatePage'))
+    '/f': {
+      component: dynamicWrapper(app, [], () => import('../layouts/IndexLayout'))
+    },
+    '/f/index':{
+      component:dynamicWrapper(app, [], () => import('../routes/Index/Index'))
     }
     // '/user/:id': {
     //   component: dynamicWrapper(app, [], () => import('../routes/User/SomeComponent')),
