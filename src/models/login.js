@@ -51,7 +51,7 @@ export default {
           },
         });
         reloadAuthorized();
-        yield put(routerRedux.push('/user/login'));
+        yield put(routerRedux.push('/f/index'));
       }
     },
   },

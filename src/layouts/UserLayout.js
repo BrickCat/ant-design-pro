@@ -6,7 +6,7 @@ import GlobalFooter from '../components/GlobalFooter';
 import logo from '../assets/logo.svg';
 import { getRoutes } from '../utils/utils';
 import {getToken} from "../utils/Token";
-
+import styles from './UserLayout.less';
 const links = [
   {
     key: 'help',

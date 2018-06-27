@@ -15,6 +15,7 @@ import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
 import styles from './IndexLayout.less';
+import {getToken} from "../utils/Token";
 
 const { Content, Header, Footer } = Layout;
 const { AuthorizedRoute, check } = Authorized;
@@ -95,9 +96,11 @@ class BasicLayout extends React.PureComponent {
     };
   }
   componentDidMount() {
-    this.props.dispatch({
-      type: 'user/fetchCurrent',
-    });
+    if(getToken()){
+      this.props.dispatch({
+        type: 'user/fetchCurrent',
+      });
+    }
   }
   componentWillUnmount() {
 
@@ -170,14 +173,20 @@ class BasicLayout extends React.PureComponent {
     }
   };
   render() {
-    const {
+    let {
       currentUser,
       collapsed,
       fetchingNotices,
       notices,
       routerData,
       match,
+      isLogin,
     } = this.props;
+    if(getToken()){
+      isLogin = true;
+    }else{
+      isLogin = false;
+    }
     const bashRedirect = this.getBaseRedirect();
     const layout = (
       <Layout>
@@ -185,6 +194,7 @@ class BasicLayout extends React.PureComponent {
           <Header style={{ padding: 0 }}>
             <GlobalHeader
               logo={logo}
+              isLogin={isLogin}
               currentUser={currentUser}
               fetchingNotices={fetchingNotices}
               notices={notices}

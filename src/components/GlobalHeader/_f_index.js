@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { Menu, Icon, Spin, Tag, Dropdown, Avatar, Divider, Tooltip } from 'antd';
+import { Menu, Button, Icon, Spin, Tag, Dropdown, Avatar, Divider, Tooltip } from 'antd';
 import moment from 'moment';
 import groupBy from 'lodash/groupBy';
 import Debounce from 'lodash-decorators/debounce';
@@ -8,9 +8,11 @@ import NoticeIcon from '../NoticeIcon';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
 
+
 export default class GlobalHeader extends PureComponent {
   componentWillUnmount() {
     this.triggerResizeEvent.cancel();
+
   }
   getNoticeData() {
     const { notices = [] } = this.props;
@@ -60,11 +62,13 @@ export default class GlobalHeader extends PureComponent {
       currentUser = {},
       fetchingNotices,
       logo,
+      isLogin,
       title,
       onNoticeVisibleChange,
       onMenuClick,
       onNoticeClear,
     } = this.props;
+    console.log(isLogin)
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="user">
@@ -84,11 +88,21 @@ export default class GlobalHeader extends PureComponent {
       <div className={styles.header}>
         <Link to="/f" className={styles.logo} key="logo">
           <img src={logo} alt="logo" width="32" />
+          <Divider type="vertical" key="line" />
+          {title != '' && <span className={styles.title} style={{paddingRight:'15px'}}>
+            {title}
+          </span>}
         </Link>
-        <Divider type="vertical" key="line" />
-        {title != '' && <Link to="/f" key="title" className={styles.title}>
-          {title}
-        </Link>}
+
+        <Menu
+          mode="horizontal"
+          defaultSelectedKeys={['1']}
+          style={{ lineHeight: '65px',display:'inline-block',height:'65px',margin: '0 auto' }}
+        >
+          <Menu.Item key="1">nav 1</Menu.Item>
+          <Menu.Item key="2">nav 2</Menu.Item>
+          <Menu.Item key="3">nav 3</Menu.Item>
+        </Menu>
         <div className={styles.right}>
           <HeaderSearch
             className={`${styles.action} ${styles.search}`}
@@ -141,7 +155,7 @@ export default class GlobalHeader extends PureComponent {
               emptyImage="https://gw.alipayobjects.com/zos/rmsportal/HsIsxMZiWKrNUavQUXqx.svg"
             />
           </NoticeIcon>
-          {currentUser.name ? (
+          { isLogin ? (
             <Dropdown overlay={menu}>
               <span className={`${styles.action} ${styles.account}`}>
                 <Avatar size="small" className={styles.avatar} src={currentUser.avatar} />
@@ -149,7 +163,11 @@ export default class GlobalHeader extends PureComponent {
               </span>
             </Dropdown>
           ) : (
-            <Spin size="small" style={{ marginLeft: 8 }} />
+            <Tooltip placement="bottom" title="登录">
+              <Link to="/user/login" className={styles.action} key="login">
+                <Icon type="user" />
+              </Link>
+            </Tooltip>
           )}
         </div>
       </div>

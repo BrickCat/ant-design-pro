@@ -16,6 +16,7 @@ import { getRoutes } from '../utils/utils';
 import Authorized from '../utils/Authorized';
 import { getMenuData } from '../common/menu';
 import logo from '../assets/logo.svg';
+import {getToken} from "../utils/Token";
 
 const { Content, Header, Footer } = Layout;
 const { AuthorizedRoute, check } = Authorized;
@@ -184,6 +185,11 @@ class BasicLayout extends React.PureComponent {
     }
   };
   render() {
+    if(!getToken()){
+      return(
+        <Redirect exact from="/" to="/user/login" />
+      )
+    }
     const {
       currentUser,
       collapsed,
