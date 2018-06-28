@@ -68,7 +68,6 @@ export default class GlobalHeader extends PureComponent {
       onMenuClick,
       onNoticeClear,
     } = this.props;
-    console.log(isLogin)
     const menu = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         <Menu.Item key="user">
@@ -97,7 +96,7 @@ export default class GlobalHeader extends PureComponent {
         <Menu
           mode="horizontal"
           defaultSelectedKeys={['1']}
-          style={{ lineHeight: '65px',display:'inline-block',height:'65px',margin: '0 auto' }}
+          style={{ lineHeight: '65px',display:'inline-block',height:'64px',margin: '0 auto' }}
         >
           <Menu.Item key="1">nav 1</Menu.Item>
           <Menu.Item key="2">nav 2</Menu.Item>

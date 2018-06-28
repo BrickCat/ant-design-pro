@@ -206,7 +206,7 @@ class BasicLayout extends React.PureComponent {
               onNoticeVisibleChange={this.handleNoticeVisibleChange}
             />
           </Header>
-          <Content style={{ margin: '24px 24px 0', height: '100%' }}>
+          <Content style={{ margin: '0 auto', height: '100%', backgroundColor:'#fff',maxWidth:'1100px', minWidth:'720px', padding:'20px',}}>
             <BackTop>
               <div className={styles.backtop}>UP</div>
             </BackTop>

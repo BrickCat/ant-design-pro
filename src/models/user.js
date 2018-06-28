@@ -18,7 +18,6 @@ export default {
     },
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
-      console.log(response)
       let user = {
         name: response.data.sysUser.username,
         avatar: response.data.sysUser.avatar,
