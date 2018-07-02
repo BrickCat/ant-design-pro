@@ -8,20 +8,20 @@
   }
   .extra {
     color: @text-color-secondary;
-    margin-top: 16px;
+    margin-top: 5px;
+    margin-bottom: 10px;
     line-height: 22px;
     & > :global(.ant-avatar) {
       vertical-align: top;
       margin-right: 8px;
-      width: 20px;
-      height: 20px;
+      width: 40px;
+      height: 40px;
       position: relative;
       top: 1px;
     }
-    & > em {
-      color: @disabled-color;
-      font-style: normal;
-      margin-left: 16px;
+    a {
+      outline: 0;
+      text-decoration: none;
     }
   }
 }
@@ -61,5 +61,32 @@ a.listItemMetaTitle {
   .listItemExtra {
     width: 0;
     height: 1px;
+  }
+}
+.pageHeaderContent {
+  display: flex;
+  .avatar {
+    flex: 0 1 60px;
+    margin-bottom: 5px;
+    & > span {
+      display: block;
+      width: 60px;
+      height: 60px;
+    }
+  }
+  .content {
+    position: relative;
+    top: 4px;
+    margin-left: 20px;
+    flex: 1 1 auto;
+    color: @text-color-secondary;
+    line-height: 22px;
+    .contentTitle {
+      font-size: 18px;
+      line-height: 28px;
+      font-weight: 500;
+      color: @heading-color;
+      margin-bottom: 12px;
+    }
   }
 }

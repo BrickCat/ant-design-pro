@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { List, Avatar, Icon ,Button ,Row, Col , Card,} from 'antd';
+import { List, Avatar, Icon ,Button ,Row, Col , Card, Popover,Tooltip} from 'antd';
 import moment from "moment/moment";
 import styles from './Index.less';
 
@@ -31,7 +31,7 @@ export default class Index extends PureComponent{
         title: `ant design part ${i}`,
         avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
         description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-        content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
+        content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure).',
       });
     }
     return listData;
@@ -50,14 +50,34 @@ export default class Index extends PureComponent{
       </span>
     );
 
-    const ListContent = ({ data: { content, avatar, href } }) => (
-      <div className={styles.listContent}>
-        <div className={styles.description}>{content}</div>
-        <div className={styles.extra}>
-          <Avatar src={avatar} size="small" />
-          <a href={href}>哈哈哈</a> 发布在 <a href={href}>{href}</a>
-          <em>{moment(new Date()).format('YYYY-MM-DD HH:mm')}</em>
+    const popoverContent = (
+      <div className={styles.pageHeaderContent}>
+        <div className={styles.avatar}>
+          <Avatar
+            size="large"
+            src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"
+            shape="square"
+          />
         </div>
+        <div className={styles.content}>
+          <div className={styles.contentTitle}>曲丽丽</div>
+          <div>交互专家蚂蚁金服某某某事业群某某平台部某某技术部UED</div>
+        </div>
+      </div>
+    );
+
+    const ListContent = ({ data: { content, avatar, href, title } }) => (
+      <div className={styles.listContent}>
+        <div className={styles.extra}>
+          <div style={{flex:1,minWidth:1}}>
+            <Popover content={popoverContent}>
+              <Avatar src={avatar} shape="square"/>
+            </Popover>
+            <a style={{fontSize: 18,fontWeight: 700, color: '#000'}}>{title}</a>
+          </div>
+
+        </div>
+        <div className={styles.description}>{content}</div>
       </div>
     );
 
@@ -77,7 +97,8 @@ export default class Index extends PureComponent{
         </div>
       ) : null;
 
-    return (<div>
+    return (
+      <div style={{maxWidth:1100,minWidth:720}}>
       <Row>
         <Col span={16}>
           <List
@@ -98,11 +119,11 @@ export default class Index extends PureComponent{
               >
                 <div>
 
-                  <List.Item.Meta
-                    avatar={<Avatar src={item.avatar} />}
-                    title={<a href={item.href}>{item.title}</a>}
-                    description={item.description}
-                  />
+                  {/*<List.Item.Meta*/}
+                    {/*avatar={<Avatar src={item.avatar} />}*/}
+                    {/*title={<a href={item.href}>{item.title}</a>}*/}
+                    {/*description={item.description}*/}
+                  {/*/>*/}
                   <ListContent data={item} />
                 </div>
               </List.Item>

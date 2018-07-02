@@ -96,11 +96,12 @@ export default class GlobalHeader extends PureComponent {
         <Menu
           mode="horizontal"
           defaultSelectedKeys={['1']}
-          style={{ lineHeight: '65px',display:'inline-block',height:'64px',margin: '0 auto' }}
+          style={{ lineHeight: '49px',display:'inline-block',height:'48px',margin: '0 auto',marginLeft:'10%' }}
         >
           <Menu.Item key="1">nav 1</Menu.Item>
           <Menu.Item key="2">nav 2</Menu.Item>
           <Menu.Item key="3">nav 3</Menu.Item>
+          <Menu.Item key="4">nav 4</Menu.Item>
         </Menu>
         <div className={styles.right}>
           <HeaderSearch

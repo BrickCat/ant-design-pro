@@ -191,7 +191,7 @@ class BasicLayout extends React.PureComponent {
     const layout = (
       <Layout>
         <Layout>
-          <Header style={{ padding: 0 }}>
+          <Header style={{ padding: 0 ,height: 48,minWidth:720}}>
             <GlobalHeader
               logo={logo}
               isLogin={isLogin}
